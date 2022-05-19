@@ -1,47 +1,66 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
-import 'bootstrap-icons/font/bootstrap-icons.css';
 import React, { useState } from 'react';
+import validator from 'validator';
+import useForm from "react-hook-form";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { CheckCircle , CheckCircleFill } from "react-bootstrap-icons";
 
 export default function Register() {
+    const [errorMessage, setErrorMessage] = useState('')
 
     const[email,setEmail]=useState('')
     const[password,setPassword]=useState('')
+    const[passwordConfirm,setPasswordConfirm]=useState('')
+
+    
 
     const submitClick=(e)=>{
-        e.preventDefault()
-        fetch("http://localhost:8080/api/v1/customer/register",{
-            method: 'POST',
-            headers: {"Content-Type":"application/json"},
-            body:JSON.stringify({email, password}
-            )
-        }).then(() => {
-            console.log("register success");
-        })
+        if (setPassword(e.target.value).length < 8 || setPassword(e.target.value).length > 30) {
+            errorMessage({ setErrorMessage: "Password is required feild"});
+            console.log("error password");
+        }else {
+            e.preventDefault()
+            fetch("http://localhost:8080/api/v1/customer/register",{
+                method: 'POST',
+                headers: {"Content-Type":"application/json"},
+                body:JSON.stringify({email, password}
+                )
+            }).then(() => {
+                console.log("register success");
+            })
+        }
+    }
+
+    const validate = (password) => {
+        
     }
 
     return(
-        <div className="container mt-5 p-4 rounded bg-light">
+        <div className="container mt-5 p-4 rounded">
             <h3>สร้างบัญชีผู้ใช้งาน</h3>
-            <form>
+            <Form onSubmit={submitClick}>
                 <Row>
                     <Col xs={12} md={8}>
-                        <label className="col-sm-2 col-form-label">อีเมล์</label>
-                        <input type="text" className="form-control" name="email" value={ email }
-                                    onChange={(e)=>setEmail(e.target.value)} 
-                                />
-                        <label className="col-sm-2 col-form-label">รหัสผ่าน</label>
-                        <input type="text" className="form-control" name="password" value={ password }
-                                    onChange={(e)=>setPassword(e.target.value)} 
-                                />
-                        <label className="col-sm-2 col-form-label">ยืนยันรหัสผ่าน</label>
-                        <input type="text" className="form-control" name="password_confirm" />
+                        <Form.Group className="mb-3">
+                            <Form.Label className="col-sm-2 col-form-label">อีเมล์</Form.Label>
+                            <Form.Control type="email" className="form-control mb-3" name="email" value={ email }
+                                        onChange={(e)=>setEmail(e.target.value)}  />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label className="col-sm-2 col-form-label">รหัสผ่าน</Form.Label>
+                            <Form.Control type="password" className="form-control mb-3" name="password" value={ password }
+                                        onChange={(e)=>setPassword(e.target.value)} />
+                                        {setErrorMessage.length > 0 && <Form.Text>{setErrorMessage}</Form.Text>}
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label className="col-sm-2 col-form-label">ยืนยันรหัสผ่าน</Form.Label>
+                            <Form.Control type="password" className="form-control mb-3" name="passwordConfirm" value={ passwordConfirm } 
+                                        onChange={(e)=>setPasswordConfirm(e.target.value)}  />
+                        </Form.Group>
+            
                     </Col>
-                    <Col xs={6} md={4} style={{ alignItems: "center" }}>
+                    <Col xs={6} md={4} className="pt-5 d-flex align-self-center flex-column">
                         <Row>
                             <Form.Text id="pasword_length" muted><CheckCircle size={15} /> ต้องมีความยาว 8-30 ตัวอักษร</Form.Text>
                             
@@ -67,9 +86,9 @@ export default function Register() {
                     />
                 </Form.Group>
                 <div className="text-center">
-                    <button type="button" className="btn btn-secondary" onClick={submitClick}><i class="bi bi-pencil-square"></i> ลงทะเบียน</button>
+                    <button type="submit" className="btn btn-secondary" ><i class="bi bi-pencil-square"></i> ลงทะเบียน</button>
                 </div>
-            </form>
+            </Form>
         </div>
     )
 }

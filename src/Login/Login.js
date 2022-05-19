@@ -7,9 +7,9 @@ export default function Login() {
         <div className="container mt-5 p-3 rounded bg-light">
             <h3>สร้างบัญชีผู้ใช้งาน</h3>
             <form>
-                <label class="col-sm-2 col-form-label">อีเมล์</label>
+                <label className="col-sm-2 col-form-label">อีเมล์</label>
                 <input className='form-control'></input>
-                <label class="col-sm-2 col-form-label">รหัสผ่าน</label>
+                <label className="col-sm-2 col-form-label">รหัสผ่าน</label>
                 <input className='form-control'></input>
             </form>
         </div>
