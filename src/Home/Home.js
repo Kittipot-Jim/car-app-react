@@ -1,17 +1,15 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
-import "bootstrap-icons/font/bootstrap-icons.css";
 import Carousel from "react-bootstrap/Carousel";
+import Container from "react-bootstrap/Container";
 
 export default function Home() {
   return (
-    <div className="container pt-5">
-      <Carousel variant="dark">
+    <Container>
+      <Carousel>
         <Carousel.Item>
           <img
-            className="d-block w-100"
-            style={{ width: "800px", height: "400px" }}
-            src="https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?cs=srgb&dl=pexels-bri-schneiter-346529.jpg&fm=jpg/ slide&bg=f5f5f5"
+            className="d-block w-100 bg-secondary"
+            style={{ height: "500px" }}
+            src="Image1"
             alt="First slide"
           />
           <Carousel.Caption>
@@ -21,9 +19,9 @@ export default function Home() {
         </Carousel.Item>
         <Carousel.Item>
           <img
-            className="d-block w-100"
-            style={{ width: "800px", height: "400px" }}
-            src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?cs=srgb&dl=pexels-james-wheeler-417074.jpg&fm=jpg slide&bg=eee"
+            className="d-block w-100 bg-secondary"
+            style={{ height: "500px" }}
+            src="Image2"
             alt="Second slide"
           />
           <Carousel.Caption>
@@ -33,9 +31,9 @@ export default function Home() {
         </Carousel.Item>
         <Carousel.Item>
           <img
-            className="d-block w-100"
-            style={{ width: "800px", height: "400px" }}
-            src="https://images.pexels.com/photos/4534200/pexels-photo-4534200.jpeg?cs=srgb&dl=pexels-arthouse-studio-4534200.jpg&fm=jpg slide&bg=e5e5e5"
+            className="d-block w-100 bg-secondary"
+            style={{ height: "500px" }}
+            src="Image3"
             alt="Third slide"
           />
           <Carousel.Caption>
@@ -46,6 +44,7 @@ export default function Home() {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-    </div>
+      <div className="container pt-5">Content</div>
+    </Container>
   );
 }
