@@ -50,7 +50,7 @@ export default function Register() {
     })
       .then((response) => response.json())
       .then((result) => {
-        if (result["code"] === "200") {
+        if (result["status"]["code"] === "200") {
           alert("SUCCESS");
         }
       })
@@ -83,6 +83,7 @@ export default function Register() {
                 type="password"
                 className="form-control mb-3"
                 name="password"
+                value={password}
                 onChange={(e) => handleChange(e.target.value)}
               />
             </Form.Group>
