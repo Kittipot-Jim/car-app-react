@@ -1,19 +1,22 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import React, { useState } from 'react';
 
 export default function Register() {
 
+    const[email,setEmail]=useState('')
+    const[password,setPassword]=useState('')
+
     const submitClick=(e)=>{
         e.preventDefault()
-        const register = {email, password}
         fetch("http://localhost:8080/api/v1/customer/register",{
             method: 'POST',
             headers: {"Content-Type":"application/json"},
-            body:JSON.stringify(register)
+            body:JSON.stringify({email, password}
+            )
         }).then(() => {
-            console.log("Task added");
-            history("/");
+            console.log("register success");
         })
     }
 
@@ -30,7 +33,7 @@ export default function Register() {
                             onChange={(e)=>setPassword(e.target.value)} 
                         />
                 <label class="col-sm-2 col-form-label">ยืนยันรหัสผ่าน</label>
-                <input type="text" className="form-control" name="note" />
+                <input type="text" className="form-control" name="password" />
                 <button type="button" className="btn btn-secondary" onClick={submitClick}><i class="bi bi-pencil-square"></i> ลงทะเบียน</button>
             </form>
         </div>
