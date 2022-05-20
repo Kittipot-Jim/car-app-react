@@ -35,13 +35,30 @@ export default function Register() {
     const targetValue = e;
     checkForNumbers(targetValue);
     checkForUpperCase(targetValue);
-    setPasswordLength(targetValue.length > 7 ? true : false);
-    setPassword(targetValue);
+    setPasswordLength(
+      targetValue.length > 7 && targetValue.length <= 30 ? true : false
+    );
+    setPassword(e);
+  };
+
+  // check confirm password
+  const handleChangePasswordConfirm = (e) => {
+    const targetValue = e;
+    if (targetValue !== password)
+      setErrorMessage("Password and Confirm Password does not match.");
+    else {
+      setErrorMessage("");
+    }
+    setPasswordConfirm(e);
   };
 
   const handleSubmit = (e) => {
+    if (password !== passwordConfirm) {
+      alert("Password and Confirm Password does not match.");
+    }
     e.preventDefault();
-    const RegisterSubmit = { email, password };
+    const RegisterSubmit = { email, password, passwordConfirm };
+    console.log(passwordConfirm);
 
     fetch("http://localhost:8080/api/v1/customer/register", {
       method: "POST",
@@ -51,7 +68,8 @@ export default function Register() {
       .then((response) => response.json())
       .then((result) => {
         if (result["status"]["code"] === "200") {
-          alert("SUCCESS");
+          alert("Register success.");
+          window.location.href = "/";
         }
       })
       .catch((error) => console.log("error", error));
@@ -60,18 +78,17 @@ export default function Register() {
   return (
     <div className="container mt-5 p-4 rounded">
       <h3>สร้างบัญชีผู้ใช้งาน</h3>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Row>
           <Col xs={12} md={8}>
             <Form.Group className="mb-3">
-              <Form.Label className="col-sm-2 col-form-label">
-                อีเมล์
-              </Form.Label>
+              <Form.Label className="col-sm-2 col-form-label">อีเมล</Form.Label>
               <Form.Control
                 type="email"
                 className="form-control mb-3"
                 name="email"
                 value={email}
+                required
                 onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
@@ -84,6 +101,7 @@ export default function Register() {
                 className="form-control mb-3"
                 name="password"
                 value={password}
+                required
                 onChange={(e) => handleChange(e.target.value)}
               />
             </Form.Group>
@@ -96,8 +114,12 @@ export default function Register() {
                 className="form-control mb-3"
                 name="passwordConfirm"
                 value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
+                required
+                onChange={(e) => handleChangePasswordConfirm(e.target.value)}
               />
+              {errorMessage && (
+                <span className="text-danger">{errorMessage}</span>
+              )}
             </Form.Group>
           </Col>
           <Col
@@ -107,24 +129,41 @@ export default function Register() {
           >
             <Row>
               <Form.Text id="pasword_length">
-                <div className={passwordLength ? "text-success" : null}>
-                  <CheckCircle size={15} /> ต้องมีความยาว 8-30 ตัวอักษร
+                <div className={passwordLength ? "text-dark" : null}>
+                  {passwordLength ? (
+                    <CheckCircleFill size={15} className="text-dark" />
+                  ) : (
+                    <CheckCircle size={15} />
+                  )}
+                  <span> ต้องมีความยาว 8-30 ตัวอักษร</span>
                 </div>
               </Form.Text>
             </Row>
             <Row>
               <Form.Text id="pasword_alphabet">
-                <div className={isUpperCase ? "text-success" : null}>
-                  <CheckCircle size={15} />
-                  ต้องประกอบด้วยอักษรภาษาอังกฤษตัวเล็กอย่างน้อย 1 ตัว
-                  และตัวใหญ่อย่างน้อย 1 ตัว
+                <div className={isUpperCase ? "text-dark" : null}>
+                  {isUpperCase ? (
+                    <CheckCircleFill size={15} className="text-dark" />
+                  ) : (
+                    <CheckCircle size={15} />
+                  )}
+                  <span>
+                    {" "}
+                    ต้องประกอบด้วยอักษรภาษาอังกฤษตัวเล็กอย่างน้อย 1
+                    ตัวและตัวใหญ่อย่างน้อย 1 ตัว
+                  </span>
                 </div>
               </Form.Text>
             </Row>
             <Row>
               <Form.Text id="pasword_number">
-                <div className={containsNumbers ? "text-success" : null}>
-                  <CheckCircle size={15} /> ต้องประกอบด้วยตัวเลขอย่างน้อย
+                <div className={containsNumbers ? "text-dark" : null}>
+                  {containsNumbers ? (
+                    <CheckCircleFill size={15} className="text-dark" />
+                  ) : (
+                    <CheckCircle size={15} />
+                  )}
+                  <span> ต้องประกอบด้วยตัวเลขอย่างน้อย</span>
                 </div>
               </Form.Text>
             </Row>
@@ -134,6 +173,7 @@ export default function Register() {
           <Form.Check
             type="checkbox"
             id="confirm_check"
+            required
             label="*ฉันได้อ่าน ข้อกำหนดและเงื่อนไข ทั้งหมดแล้ว ฉันเข้าใจและยอมรับ นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคล"
           />
           <Form.Check
@@ -146,8 +186,8 @@ export default function Register() {
           <button
             type="submit"
             disabled={btnStatus}
+            style={{ width: "365px " }}
             className="btn btn-secondary"
-            onSubmit={handleSubmit}
           >
             <i className="bi bi-pencil-square"></i> ลงทะเบียน
           </button>
