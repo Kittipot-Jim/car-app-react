@@ -39,6 +39,7 @@ export default function Register() {
       targetValue.length > 7 && targetValue.length <= 30 ? true : false
     );
     setPassword(e);
+    setPasswordConfirm('');
   };
 
   // check confirm password
@@ -70,6 +71,8 @@ export default function Register() {
         if (result["status"]["code"] === "200") {
           alert("Register success.");
           window.location.href = "/";
+        } else if (result["status"]["code"] === "500") {
+          alert("This email is already in the system.");
         }
       })
       .catch((error) => console.log("error", error));
