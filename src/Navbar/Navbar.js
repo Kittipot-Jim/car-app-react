@@ -13,8 +13,31 @@ export default function Navbar() {
               <li className="nav-item nav-link">เกี่ยวกับเรา</li>
             </ul>
             <ul className="navbar-nav d-flex flex-row">
-              <li className="nav-item nav-link">
-                <i className="bi bi-person" />
+              <li className="nav-item">
+                <a href="#" className="nav-link" data-bs-toggle="dropdown">
+                  <i className="bi bi-person" />
+                </a>
+                <ul className="dropdown-menu dropdown-menu-end">
+                  <img src="../Images/user-free-icon-font.png" alt="Avatar" />
+                  <li>
+                    <button className="dropdown-item" type="button">
+                      ข้อมูลส่วนตัว
+                    </button>
+                  </li>
+                  <li>
+                    <button className="dropdown-item" type="button">
+                      ตั้งค่าบัญชี
+                    </button>
+                  </li>
+                  <li>
+                    <div className="dropdown-divider"></div>
+                  </li>
+                  <li>
+                    <button className="dropdown-item" type="button">
+                      ออกจากระบบ
+                    </button>
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>
