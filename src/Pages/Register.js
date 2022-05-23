@@ -46,7 +46,7 @@ export default function Register() {
   const handleChangePasswordConfirm = (e) => {
     const targetValue = e;
     if (targetValue !== password)
-      setErrorMessage("Password and Confirm Password does not match.");
+      setErrorMessage("รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน");
     else {
       setErrorMessage("");
     }
@@ -54,24 +54,22 @@ export default function Register() {
   };
 
   const handleSubmit = (e) => {
-    if (password !== passwordConfirm) {
-      alert("Password and Confirm Password does not match.");
-    }
     e.preventDefault();
-    const RegisterSubmit = { email, password, passwordConfirm };
 
     fetch("http://localhost:8080/api/v1/customer/register", {
       method: "POST",
       headers: { "content-Type": "application/json" },
-      body: JSON.stringify(RegisterSubmit),
+      body: JSON.stringify({ email, password, passwordConfirm }),
     })
       .then((response) => response.json())
       .then((result) => {
         if (result["status"]["code"] === "200") {
-          alert("Register success.");
+          alert("ลงทะเบียนสำเร็จ");
           window.location.href = "/";
         } else if (result["status"]["code"] === "500") {
-          alert("This email is already in the system.");
+          alert(
+            "อีเมลนี้มีอยู่ในระบบแล้ว หรือ รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน"
+          );
         }
       })
       .catch((error) => console.log("error", error));

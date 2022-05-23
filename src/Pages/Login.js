@@ -8,23 +8,33 @@ export default function Login({ setIsOpen }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleChange = (e) => {
+    if (e != null) {
+      setErrorMessage("");
+    }
+    setEmail(e);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const RegisterSubmit = { email, password };
 
     fetch("http://localhost:8080/api/v1/customer/authen", {
       method: "POST",
       headers: { "content-Type": "application/json" },
-      body: JSON.stringify(RegisterSubmit),
+      body: JSON.stringify({ email, password }),
     })
       .then((response) => response.json())
       .then((result) => {
         if (result["status"]["code"] === "200") {
-          alert("Login success.");
+          alert("เข้าสู่ระบบสำเร็จ");
           localStorage.setItem("token", result.data.token);
           window.location = "/";
-        } else if (result["status"]["code"] === "500") {
-          alert("Login failed.");
+        } else if (result["status"]["code"] === "401") {
+          setErrorMessage("อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
+          setEmail("");
+          setPassword("");
         }
       })
       .catch((error) => console.log("error", error));
@@ -44,6 +54,9 @@ export default function Login({ setIsOpen }) {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit} className="p-3">
+            {errorMessage ? (
+              <p className="text-danger text-center">{errorMessage}</p>
+            ) : null}
             <Row>
               <Col xs={12} md={12}>
                 <Form.Group className="mb-3">
@@ -56,7 +69,7 @@ export default function Login({ setIsOpen }) {
                     name="email"
                     value={email}
                     required
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => handleChange(e.target.value)}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
