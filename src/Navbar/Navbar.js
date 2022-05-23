@@ -1,4 +1,9 @@
+import React, { useState } from "react";
+import Login from "../Pages/Login";
+
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <header>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
@@ -17,25 +22,35 @@ export default function Navbar() {
                 <a href="#" className="nav-link" data-bs-toggle="dropdown">
                   <i className="bi bi-person" />
                 </a>
-                <ul className="dropdown-menu dropdown-menu-end">
-                  <img src="../Images/user-free-icon-font.png" alt="Avatar" />
+                <ul
+                  className="dropdown-menu dropdown-menu-end"
+                  style={{ width: "285px" }}
+                >
+                  <div className="d-flex justify-content-center">
+                    <img
+                      src="https://cdn-icons.flaticon.com/png/512/552/premium/552848.png?token=exp=1653040471~hmac=f46a1090cd8db821fc32e01961e06280"
+                      alt="Avatar"
+                      className="d-flex justify-content-center p-3"
+                      style={{ width: "134px" }}
+                    />
+                  </div>
                   <li>
-                    <button className="dropdown-item" type="button">
-                      ข้อมูลส่วนตัว
+                    <button
+                      className="dropdown-item"
+                      type="button"
+                      onClick={() => setIsOpen(true)}
+                    >
+                      เข้าสู่ระบบ
                     </button>
-                  </li>
-                  <li>
-                    <button className="dropdown-item" type="button">
-                      ตั้งค่าบัญชี
-                    </button>
+                    {isOpen && <Login setIsOpen={setIsOpen} />}
                   </li>
                   <li>
                     <div className="dropdown-divider"></div>
                   </li>
                   <li>
-                    <button className="dropdown-item" type="button">
-                      ออกจากระบบ
-                    </button>
+                    <a className="dropdown-item" href="/register">
+                      สมัครสมาชิก
+                    </a>
                   </li>
                 </ul>
               </li>

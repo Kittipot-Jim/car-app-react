@@ -39,7 +39,7 @@ export default function Register() {
       targetValue.length > 7 && targetValue.length <= 30 ? true : false
     );
     setPassword(e);
-    setPasswordConfirm('');
+    setPasswordConfirm("");
   };
 
   // check confirm password
@@ -59,7 +59,6 @@ export default function Register() {
     }
     e.preventDefault();
     const RegisterSubmit = { email, password, passwordConfirm };
-    console.log(passwordConfirm);
 
     fetch("http://localhost:8080/api/v1/customer/register", {
       method: "POST",
@@ -120,8 +119,10 @@ export default function Register() {
                 required
                 onChange={(e) => handleChangePasswordConfirm(e.target.value)}
               />
-              {errorMessage && (
-                <span className="text-danger">{errorMessage}</span>
+              {errorMessage ? (
+                <p className="text-danger">{errorMessage}</p>
+              ) : (
+                <br />
               )}
             </Form.Group>
           </Col>
@@ -172,7 +173,7 @@ export default function Register() {
             </Row>
           </Col>
         </Row>
-        <Form.Group className="mb-3 p-3">
+        <Form.Group className="mb-3">
           <Form.Check
             type="checkbox"
             id="confirm_check"
