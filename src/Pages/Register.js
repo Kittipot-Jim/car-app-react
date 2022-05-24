@@ -17,8 +17,13 @@ export default function Register() {
   const [isUpperCase, setIsUpperCase] = useState(false);
 
   const [alertError, setAlertError] = useState(false);
+  const [alertSuccess, setAlertSuccess] = useState(false);
 
-  const handleAlert = () => {
+  const handleAlertSuccess = () => {
+    setAlertSuccess(true);
+  };
+
+  const handleAlertError = () => {
     setAlertError(true);
   };
 
@@ -71,10 +76,10 @@ export default function Register() {
       .then((response) => response.json())
       .then((result) => {
         if (result["status"]["code"] === "200") {
-          alert("ลงทะเบียนสำเร็จ");
+          handleAlertSuccess();
           window.location.href = "/";
         } else if (result["status"]["code"] === "500") {
-          handleAlert();
+          handleAlertError();
         }
       })
       .catch((error) => console.log("error", error));
@@ -83,6 +88,9 @@ export default function Register() {
   return (
     <div className="container">
       <div className="container bg-form-register mt-5 p-4 rounded">
+        {alertSuccess ? (
+          <Alert variant="success">สมัครสมาชิกสำเร็จ</Alert>
+        ) : null}
         {alertError ? (
           <Alert
             variant="danger"
