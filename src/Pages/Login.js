@@ -104,8 +104,8 @@ export default function Login({ setIsOpen }) {
             <div className="text-center">
               <button
                 type="submit"
-                style={{ width: "365px " }}
-                className="btn btn-secondary mt-3 fw-bold"
+                style={{ width: "365px ", backgroundColor: "#9F8F7C" }}
+                className="btn fw-bold text-white"
               >
                 เข้าสู่ระบบ
               </button>

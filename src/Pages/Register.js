@@ -205,10 +205,10 @@ export default function Register() {
             <button
               type="submit"
               disabled={btnStatus}
-              style={{ width: "365px " }}
-              className="btn btn-secondary fw-bold"
+              style={{ width: "365px ", backgroundColor: "#9F8F7C" }}
+              className="btn fw-bold text-white mb-4"
             >
-              <i className="bi bi-pencil-square"></i> ลงทะเบียน
+              ลงทะเบียน
             </button>
           </div>
         </Form>

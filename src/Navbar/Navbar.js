@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import decode from "jwt-decode";
 import Login from "../Pages/Login";
+import Image from "react-bootstrap/Image";
+import icon from "../Images/user-free-icon-font.png";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,23 +27,36 @@ export default function Navbar() {
 
   return (
     <header>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
+      <nav
+        className="navbar navbar-expand navbar-dark bg-dark"
+        style={{ height: "65px" }}
+      >
         <div className="container-fluid">
           <div className="collapse navbar-collapse">
             <a className="navbar-brand" href="/">
               <i className="bi bi-house" /> LOGO
             </a>
-            <ul className="navbar-nav me-auto">
-              <li className="nav-item nav-link ps-3">ซื้อรถยนต์</li>
-              <li className="nav-item nav-link ps-3">ขายรถยนต์</li>
-              <li className="nav-item nav-link ps-3">เกี่ยวกับเรา</li>
+            <ul className="navbar-nav me-auto" style={{ fontSize: "14px" }}>
+              <li className="nav-item nav-link ps-5 fw-bold text-white">
+                ซื้อรถยนต์
+              </li>
+              <li className="nav-item nav-link ps-5 fw-bold text-white">
+                ขายรถยนต์
+              </li>
+              <li className="nav-item nav-link ps-5 fw-bold text-white">
+                เกี่ยวกับเรา
+              </li>
             </ul>
             {token ? (
               // Navbar with token
               <ul className="navbar-nav d-flex flex-row">
                 <li className="nav-item">
                   <a href="#" className="nav-link" data-bs-toggle="dropdown">
-                    <i className="bi bi-person color-app" />
+                    <Image
+                      src={icon}
+                      alt="nav-icon"
+                      style={{ width: "19px", height: "18px" }}
+                    />
                   </a>
                   <ul
                     className="dropdown-menu dropdown-menu-end"
@@ -51,7 +66,7 @@ export default function Navbar() {
                       <img
                         src="https://cdn-icons.flaticon.com/png/512/552/premium/552848.png?token=exp=1653040471~hmac=f46a1090cd8db821fc32e01961e06280"
                         alt="Avatar"
-                        className="d-flex justify-content-center p-3"
+                        className="d-flex justify-content-center p-3 mb-2"
                         style={{ width: "134px" }}
                       />
                     </div>
@@ -81,7 +96,11 @@ export default function Navbar() {
               <ul className="navbar-nav d-flex flex-row">
                 <li className="nav-item">
                   <a href="#" className="nav-link" data-bs-toggle="dropdown">
-                    <i className="bi bi-person color-app" />
+                    <Image
+                      src={icon}
+                      alt="nav-icon"
+                      style={{ width: "19px", height: "18px" }}
+                    />
                   </a>
                   <ul
                     className="dropdown-menu dropdown-menu-end"
@@ -91,7 +110,7 @@ export default function Navbar() {
                       <img
                         src="https://cdn-icons.flaticon.com/png/512/552/premium/552848.png?token=exp=1653040471~hmac=f46a1090cd8db821fc32e01961e06280"
                         alt="Avatar"
-                        className="d-flex justify-content-center p-3"
+                        className="d-flex justify-content-center p-3 mb-2"
                         style={{ width: "134px" }}
                       />
                     </div>
