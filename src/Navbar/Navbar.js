@@ -3,6 +3,7 @@ import decode from "jwt-decode";
 import Login from "../Pages/Login";
 import Image from "react-bootstrap/Image";
 import icon from "../Images/user-free-icon-font.png";
+import profile from "../Images/profile.png";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,7 +65,7 @@ export default function Navbar() {
                   >
                     <div className="d-flex justify-content-center">
                       <img
-                        src="https://cdn-icons.flaticon.com/png/512/552/premium/552848.png?token=exp=1653040471~hmac=f46a1090cd8db821fc32e01961e06280"
+                        src={profile}
                         alt="Avatar"
                         className="d-flex justify-content-center p-3 mb-2"
                         style={{ width: "134px" }}
@@ -108,7 +109,7 @@ export default function Navbar() {
                   >
                     <div className="d-flex justify-content-center">
                       <img
-                        src="https://cdn-icons.flaticon.com/png/512/552/premium/552848.png?token=exp=1653040471~hmac=f46a1090cd8db821fc32e01961e06280"
+                        src={profile}
                         alt="Avatar"
                         className="d-flex justify-content-center p-3 mb-2"
                         style={{ width: "134px" }}
