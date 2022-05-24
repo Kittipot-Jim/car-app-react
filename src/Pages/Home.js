@@ -1,14 +1,13 @@
 import Carousel from "react-bootstrap/Carousel";
-import Container from "react-bootstrap/Container";
 
 export default function Home() {
   return (
-    <Container>
+    <div>
       <Carousel>
         <Carousel.Item>
           <img
             className="d-block w-100 bg-secondary"
-            style={{ height: "500px" }}
+            style={{ height: "445px" }}
             src="Image1"
             alt="First slide"
           />
@@ -20,7 +19,7 @@ export default function Home() {
         <Carousel.Item>
           <img
             className="d-block w-100 bg-secondary"
-            style={{ height: "500px" }}
+            style={{ height: "445px" }}
             src="Image2"
             alt="Second slide"
           />
@@ -32,7 +31,7 @@ export default function Home() {
         <Carousel.Item>
           <img
             className="d-block w-100 bg-secondary"
-            style={{ height: "500px" }}
+            style={{ height: "445px" }}
             src="Image3"
             alt="Third slide"
           />
@@ -45,6 +44,6 @@ export default function Home() {
         </Carousel.Item>
       </Carousel>
       <div className="container pt-5">Content</div>
-    </Container>
+    </div>
   );
 }

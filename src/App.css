@@ -5,3 +5,28 @@
 * {
   font-family: 'Prompt', sans-serif;
 }
+
+.color-app {
+  color: #9F8F7C;
+}
+
+.bg-app, html, div#root {
+  background-color: #F6F7F8;
+}
+
+.bg-form-register {
+  background-color: #FFFFFF;
+}
+
+.submit-button {
+  background-color: #9F8F7C;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  width: 365px;
+  height: 39px;
+}
+
+.submit-button:hover {
+  background-color: #958168;
+}

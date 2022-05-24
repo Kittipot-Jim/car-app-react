@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import decode from "jwt-decode";
 import Login from "../Pages/Login";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const token = localStorage.getItem("token");
+  const [token, setToken] = useState(localStorage.getItem("token"));
+
+  useEffect(() => {
+    if (token) {
+      const decodedToken = decode(token);
+
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        localStorage.removeItem("token");
+        setToken(null);
+      }
+    }
+  }, []);
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -20,16 +32,16 @@ export default function Navbar() {
               <i className="bi bi-house" /> LOGO
             </a>
             <ul className="navbar-nav me-auto">
-              <li className="nav-item nav-link">ซื้อรถยนต์</li>
-              <li className="nav-item nav-link">ขายรถยนต์</li>
-              <li className="nav-item nav-link">เกี่ยวกับเรา</li>
+              <li className="nav-item nav-link ps-3">ซื้อรถยนต์</li>
+              <li className="nav-item nav-link ps-3">ขายรถยนต์</li>
+              <li className="nav-item nav-link ps-3">เกี่ยวกับเรา</li>
             </ul>
             {token ? (
               // Navbar with token
               <ul className="navbar-nav d-flex flex-row">
                 <li className="nav-item">
                   <a href="#" className="nav-link" data-bs-toggle="dropdown">
-                    <i className="bi bi-person" />
+                    <i className="bi bi-person color-app" />
                   </a>
                   <ul
                     className="dropdown-menu dropdown-menu-end"
@@ -69,7 +81,7 @@ export default function Navbar() {
               <ul className="navbar-nav d-flex flex-row">
                 <li className="nav-item">
                   <a href="#" className="nav-link" data-bs-toggle="dropdown">
-                    <i className="bi bi-person" />
+                    <i className="bi bi-person color-app" />
                   </a>
                   <ul
                     className="dropdown-menu dropdown-menu-end"

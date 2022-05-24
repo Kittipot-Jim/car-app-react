@@ -50,10 +50,10 @@ export default function Login({ setIsOpen }) {
         onHide={() => setIsOpen(false)}
       >
         <Modal.Header closeButton>
-          <Modal.Title>เข้าสู่ระบบ</Modal.Title>
+          <Modal.Title className="ps-5">เข้าสู่ระบบ</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit} className="p-3">
+          <Form onSubmit={handleSubmit} className="ps-5 pe-5">
             {errorMessage ? (
               <p className="text-danger text-center">{errorMessage}</p>
             ) : null}
@@ -96,9 +96,9 @@ export default function Login({ setIsOpen }) {
               <button
                 type="submit"
                 style={{ width: "365px " }}
-                className="btn btn-secondary mt-3"
+                className="btn btn-secondary mt-3 fw-bold"
               >
-                <i className="bi bi-pencil-square"></i> เข้าสู่ระบบ
+                เข้าสู่ระบบ
               </button>
             </div>
             <div className="pt-3 d-flex justify-content-between">

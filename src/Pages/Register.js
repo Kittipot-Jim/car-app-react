@@ -76,125 +76,129 @@ export default function Register() {
   };
 
   return (
-    <div className="container mt-5 p-4 rounded">
-      <h3>สร้างบัญชีผู้ใช้งาน</h3>
-      <Form onSubmit={handleSubmit}>
-        <Row>
-          <Col xs={12} md={8}>
-            <Form.Group className="mb-3">
-              <Form.Label className="col-sm-2 col-form-label">อีเมล</Form.Label>
-              <Form.Control
-                type="email"
-                className="form-control mb-3"
-                name="email"
-                value={email}
-                required
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label className="col-sm-2 col-form-label">
-                รหัสผ่าน
-              </Form.Label>
-              <Form.Control
-                type="password"
-                className="form-control mb-3"
-                name="password"
-                value={password}
-                required
-                onChange={(e) => handleChange(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label className="col-sm-2 col-form-label">
-                ยืนยันรหัสผ่าน
-              </Form.Label>
-              <Form.Control
-                type="password"
-                className="form-control mb-3"
-                name="passwordConfirm"
-                value={passwordConfirm}
-                required
-                onChange={(e) => handleChangePasswordConfirm(e.target.value)}
-              />
-              {errorMessage ? (
-                <p className="text-danger">{errorMessage}</p>
-              ) : (
-                <br />
-              )}
-            </Form.Group>
-          </Col>
-          <Col
-            xs={6}
-            md={4}
-            className="pt-5 d-flex align-self-center flex-column"
-          >
-            <Row>
-              <Form.Text id="pasword_length">
-                <div className={passwordLength ? "text-dark" : null}>
-                  {passwordLength ? (
-                    <CheckCircleFill size={15} className="text-dark" />
-                  ) : (
-                    <CheckCircle size={15} />
-                  )}
-                  <span> ต้องมีความยาว 8-30 ตัวอักษร</span>
-                </div>
-              </Form.Text>
-            </Row>
-            <Row>
-              <Form.Text id="pasword_alphabet">
-                <div className={isUpperCase ? "text-dark" : null}>
-                  {isUpperCase ? (
-                    <CheckCircleFill size={15} className="text-dark" />
-                  ) : (
-                    <CheckCircle size={15} />
-                  )}
-                  <span>
-                    {" "}
-                    ต้องประกอบด้วยอักษรภาษาอังกฤษตัวเล็กอย่างน้อย 1
-                    ตัวและตัวใหญ่อย่างน้อย 1 ตัว
-                  </span>
-                </div>
-              </Form.Text>
-            </Row>
-            <Row>
-              <Form.Text id="pasword_number">
-                <div className={containsNumbers ? "text-dark" : null}>
-                  {containsNumbers ? (
-                    <CheckCircleFill size={15} className="text-dark" />
-                  ) : (
-                    <CheckCircle size={15} />
-                  )}
-                  <span> ต้องประกอบด้วยตัวเลขอย่างน้อย</span>
-                </div>
-              </Form.Text>
-            </Row>
-          </Col>
-        </Row>
-        <Form.Group className="mb-3">
-          <Form.Check
-            type="checkbox"
-            id="confirm_check"
-            required
-            label="*ฉันได้อ่าน ข้อกำหนดและเงื่อนไข ทั้งหมดแล้ว ฉันเข้าใจและยอมรับ นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคล"
-          />
-          <Form.Check
-            type="checkbox"
-            id="email_check"
-            label="ฉันต้องการได้รับข่าวสารทางอีเมล"
-          />
-        </Form.Group>
-        <div className="text-center">
-          <button
-            type="submit"
-            disabled={btnStatus}
-            style={{ width: "365px " }}
-            className="btn btn-secondary"
-          >
-            <i className="bi bi-pencil-square"></i> ลงทะเบียน
-          </button>
-        </div>
-      </Form>
+    <div className="container">
+      <div className="container bg-form-register mt-5 p-4 rounded">
+        <h5 className="fw-bold pb-3">สร้างบัญชีผู้ใช้งาน</h5>
+        <Form onSubmit={handleSubmit}>
+          <Row>
+            <Col xs={12} md={8}>
+              <Form.Group className="mb-3">
+                <Form.Label className="col-sm-2 col-form-label">
+                  อีเมล<span className="text-danger">*</span>
+                </Form.Label>
+                <Form.Control
+                  type="email"
+                  className="form-control mb-3"
+                  name="email"
+                  value={email}
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label className="col-sm-2 col-form-label">
+                  รหัสผ่าน<span className="text-danger">*</span>
+                </Form.Label>
+                <Form.Control
+                  type="password"
+                  className="form-control mb-3"
+                  name="password"
+                  value={password}
+                  required
+                  onChange={(e) => handleChange(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label className="col-sm-3 col-form-label">
+                  ยืนยันรหัสผ่าน<span className="text-danger">*</span>
+                </Form.Label>
+                <Form.Control
+                  type="password"
+                  className="form-control mb-3"
+                  name="passwordConfirm"
+                  value={passwordConfirm}
+                  required
+                  onChange={(e) => handleChangePasswordConfirm(e.target.value)}
+                />
+                {errorMessage ? (
+                  <p className="text-danger">{errorMessage}</p>
+                ) : (
+                  <br />
+                )}
+              </Form.Group>
+            </Col>
+            <Col
+              xs={6}
+              md={4}
+              className="pt-5 d-flex align-self-center flex-column"
+            >
+              <Row>
+                <Form.Text id="pasword_length">
+                  <div className={passwordLength ? "text-dark" : null}>
+                    {passwordLength ? (
+                      <CheckCircleFill size={15} className="text-dark" />
+                    ) : (
+                      <CheckCircle size={15} />
+                    )}
+                    <span> ต้องมีความยาว 8-30 ตัวอักษร</span>
+                  </div>
+                </Form.Text>
+              </Row>
+              <Row>
+                <Form.Text id="pasword_alphabet">
+                  <div className={isUpperCase ? "text-dark" : null}>
+                    {isUpperCase ? (
+                      <CheckCircleFill size={15} className="text-dark" />
+                    ) : (
+                      <CheckCircle size={15} />
+                    )}
+                    <span>
+                      {" "}
+                      ต้องประกอบด้วยอักษรภาษาอังกฤษตัวเล็กอย่างน้อย 1
+                      ตัวและตัวใหญ่อย่างน้อย 1 ตัว
+                    </span>
+                  </div>
+                </Form.Text>
+              </Row>
+              <Row>
+                <Form.Text id="pasword_number">
+                  <div className={containsNumbers ? "text-dark" : null}>
+                    {containsNumbers ? (
+                      <CheckCircleFill size={15} className="text-dark" />
+                    ) : (
+                      <CheckCircle size={15} />
+                    )}
+                    <span> ต้องประกอบด้วยตัวเลขอย่างน้อย</span>
+                  </div>
+                </Form.Text>
+              </Row>
+            </Col>
+          </Row>
+          <Form.Group className="mb-3">
+            <Form.Check
+              type="checkbox"
+              id="confirm_check"
+              required
+              label="*ฉันได้อ่าน ข้อกำหนดและเงื่อนไข ทั้งหมดแล้ว ฉันเข้าใจและยอมรับ นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคล"
+            />
+            <Form.Check
+              type="checkbox"
+              id="email_check"
+              label="ฉันต้องการได้รับข่าวสารทางอีเมล"
+            />
+          </Form.Group>
+          <div className="text-center">
+            <button
+              type="submit"
+              disabled={btnStatus}
+              style={{ width: "365px " }}
+              className="btn btn-secondary fw-bold"
+            >
+              <i className="bi bi-pencil-square"></i> ลงทะเบียน
+            </button>
+          </div>
+        </Form>
+      </div>
     </div>
   );
 }
