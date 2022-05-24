@@ -3,12 +3,18 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Modal from "react-bootstrap/Modal";
+import Alert from "react-bootstrap/Alert";
 
 export default function Login({ setIsOpen }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [errorMessage, setErrorMessage] = useState("");
+  const [alertSuccess, setAlertSuccess] = useState(false);
+
+  const handleAlert = () => {
+    setAlertSuccess(true);
+  };
 
   const handleChange = (e) => {
     if (e != null) {
@@ -28,7 +34,7 @@ export default function Login({ setIsOpen }) {
       .then((response) => response.json())
       .then((result) => {
         if (result["status"]["code"] === "200") {
-          alert("เข้าสู่ระบบสำเร็จ");
+          handleAlert();
           localStorage.setItem("token", result.data.token);
           window.location = "/";
         } else if (result["status"]["code"] === "401") {
@@ -54,6 +60,9 @@ export default function Login({ setIsOpen }) {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit} className="ps-5 pe-5">
+            {alertSuccess ? (
+              <Alert variant="success">เข้าสู่ระบบสำเร็จ</Alert>
+            ) : null}
             {errorMessage ? (
               <p className="text-danger text-center">{errorMessage}</p>
             ) : null}

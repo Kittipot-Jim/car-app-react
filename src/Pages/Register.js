@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Alert from "react-bootstrap/Alert";
 import { CheckCircle, CheckCircleFill } from "react-bootstrap-icons";
 
 export default function Register() {
@@ -14,6 +15,12 @@ export default function Register() {
   const [passwordLength, setPasswordLength] = useState(false);
   const [containsNumbers, setContainsNumber] = useState(false);
   const [isUpperCase, setIsUpperCase] = useState(false);
+
+  const [alertError, setAlertError] = useState(false);
+
+  const handleAlert = () => {
+    setAlertError(true);
+  };
 
   const btnStatus =
     passwordLength && containsNumbers && isUpperCase ? false : true;
@@ -67,9 +74,7 @@ export default function Register() {
           alert("ลงทะเบียนสำเร็จ");
           window.location.href = "/";
         } else if (result["status"]["code"] === "500") {
-          alert(
-            "อีเมลนี้มีอยู่ในระบบแล้ว หรือ รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน"
-          );
+          handleAlert();
         }
       })
       .catch((error) => console.log("error", error));
@@ -78,6 +83,15 @@ export default function Register() {
   return (
     <div className="container">
       <div className="container bg-form-register mt-5 p-4 rounded">
+        {alertError ? (
+          <Alert
+            variant="danger"
+            onClose={() => setAlertError(false)}
+            dismissible
+          >
+            อีเมลนี้มีอยู่ในระบบแล้ว หรือ รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน
+          </Alert>
+        ) : null}
         <h5 className="fw-bold pb-3">สร้างบัญชีผู้ใช้งาน</h5>
         <Form onSubmit={handleSubmit}>
           <Row>
