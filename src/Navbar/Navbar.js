@@ -30,14 +30,18 @@ export default function Navbar() {
     <header>
       <nav
         className="navbar navbar-expand navbar-dark bg-dark"
-        style={{ height: "65px" }}
+        style={{ height: "100px" }}
       >
         <div className="container-fluid">
           <div className="collapse navbar-collapse">
-            <a className="navbar-brand" href="/">
+            <a
+              className="navbar-brand text-dark text-center bg-white"
+              href="/"
+              style={{ width: "180px", height: "39px" }}
+            >
               <i className="bi bi-house" /> LOGO
             </a>
-            <ul className="navbar-nav me-auto" style={{ fontSize: "14px" }}>
+            <ul className="navbar-nav me-auto" style={{ fontSize: "20px" }}>
               <li className="nav-item nav-link ps-5 fw-bold text-white">
                 ซื้อรถยนต์
               </li>
@@ -56,19 +60,19 @@ export default function Navbar() {
                     <Image
                       src={icon}
                       alt="nav-icon"
-                      style={{ width: "19px", height: "18px" }}
+                      style={{ width: "23.15px", height: "25px" }}
                     />
                   </a>
                   <ul
                     className="dropdown-menu dropdown-menu-end"
-                    style={{ width: "285px" }}
+                    style={{ width: "335px" }}
                   >
                     <div className="d-flex justify-content-center">
                       <img
                         src={profile}
                         alt="Avatar"
                         className="d-flex justify-content-center p-3 mb-2"
-                        style={{ width: "134px" }}
+                        style={{ width: "134px", height: "131px" }}
                       />
                     </div>
                     <li>
@@ -100,19 +104,19 @@ export default function Navbar() {
                     <Image
                       src={icon}
                       alt="nav-icon"
-                      style={{ width: "19px", height: "18px" }}
+                      style={{ width: "23.15px", height: "25px" }}
                     />
                   </a>
                   <ul
                     className="dropdown-menu dropdown-menu-end"
-                    style={{ width: "285px" }}
+                    style={{ width: "335px" }}
                   >
                     <div className="d-flex justify-content-center">
                       <img
                         src={profile}
                         alt="Avatar"
                         className="d-flex justify-content-center p-3 mb-2"
-                        style={{ width: "134px" }}
+                        style={{ width: "134px", height: "131px" }}
                       />
                     </div>
                     <li>
