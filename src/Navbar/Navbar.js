@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import decode from "jwt-decode";
 import Login from "../Pages/Login";
 import Image from "react-bootstrap/Image";
@@ -6,16 +7,23 @@ import icon from "../Images/user-free-icon-font.png";
 import profile from "../Images/profile.png";
 
 export default function Navbar() {
+  const API_URL = "http://localhost:8080/api/v1/customer/";
+
   const [isOpen, setIsOpen] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     if (token) {
       const decodedToken = decode(token);
 
-      if (decodedToken.exp * 1000 < new Date().getTime()) {
-        localStorage.removeItem("token");
-        setToken(null);
+      if (decodedToken.exp * 1000 < new Date().getTime() + 100000) {
+        axios
+          .get(API_URL + "refresh-token", {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((response) => {
+            localStorage.setItem("token", response.data.data.token);
+          });
       }
     }
   }, []);
