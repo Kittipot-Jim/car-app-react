@@ -87,7 +87,7 @@ export default function Register() {
 
   return (
     <div className="container">
-      <div className="container bg-form-register mt-5 p-4 rounded">
+      <div className="container bg-form-register p-5" style={{marginTop: '100px'}}>
         {alertSuccess ? (
           <Alert variant="success">สมัครสมาชิกสำเร็จ</Alert>
         ) : null}
@@ -100,12 +100,14 @@ export default function Register() {
             อีเมลนี้มีอยู่ในระบบแล้ว หรือ รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน
           </Alert>
         ) : null}
-        <h5 className="fw-bold pb-3">สร้างบัญชีผู้ใช้งาน</h5>
+        <h5 className="fw-bold pb-3" style={{fontSize:'20px'}}>สร้างบัญชีผู้ใช้งาน</h5>
         <Form onSubmit={handleSubmit}>
           <Row>
-            <Col xs={12} md={8}>
+            <Col 
+            xs={8}
+            md={9}>
               <Form.Group className="mb-3">
-                <Form.Label className="col-sm-2 col-form-label">
+                <Form.Label className="col-sm-2 col-form-label" style={{fontSize:'18px'}}>
                   อีเมล<span className="text-danger">*</span>
                 </Form.Label>
                 <Form.Control
@@ -118,7 +120,7 @@ export default function Register() {
                 />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label className="col-sm-2 col-form-label">
+                <Form.Label className="col-sm-2 col-form-label" style={{fontSize:'18px'}}>
                   รหัสผ่าน<span className="text-danger">*</span>
                 </Form.Label>
                 <Form.Control
@@ -131,7 +133,7 @@ export default function Register() {
                 />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label className="col-sm-3 col-form-label">
+                <Form.Label className="col-sm-3 col-form-label" style={{fontSize:'18px'}}>
                   ยืนยันรหัสผ่าน<span className="text-danger">*</span>
                 </Form.Label>
                 <Form.Control
@@ -150,13 +152,13 @@ export default function Register() {
               </Form.Group>
             </Col>
             <Col
-              xs={6}
-              md={4}
+              xs={4}
+              md={3}
               className="pt-5 d-flex align-self-center flex-column"
             >
               <Row>
                 <Form.Text id="pasword_length">
-                  <div className={passwordLength ? "text-dark" : null}>
+                  <div className={passwordLength ? "text-dark" : null} style={{fontSize:'12px'}}>
                     {passwordLength ? (
                       <CheckCircleFill size={15} className="text-dark" />
                     ) : (
@@ -168,7 +170,7 @@ export default function Register() {
               </Row>
               <Row>
                 <Form.Text id="pasword_alphabet">
-                  <div className={isUpperCase ? "text-dark" : null}>
+                  <div className={isUpperCase ? "text-dark" : null} style={{fontSize:'12px'}}>
                     {isUpperCase ? (
                       <CheckCircleFill size={15} className="text-dark" />
                     ) : (
@@ -184,7 +186,7 @@ export default function Register() {
               </Row>
               <Row>
                 <Form.Text id="pasword_number">
-                  <div className={containsNumbers ? "text-dark" : null}>
+                  <div className={containsNumbers ? "text-dark" : null} style={{fontSize:'12px'}}>
                     {containsNumbers ? (
                       <CheckCircleFill size={15} className="text-dark" />
                     ) : (
@@ -197,15 +199,24 @@ export default function Register() {
             </Col>
           </Row>
           <Form.Group className="mb-3">
-            <Form.Check
-              type="checkbox"
-              id="confirm_check"
-              required
-              label="*ฉันได้อ่าน ข้อกำหนดและเงื่อนไข ทั้งหมดแล้ว ฉันเข้าใจและยอมรับ นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคล"
-            />
+            <Form.Text id="pasword_length">
+              <Form.Check
+                type="checkbox"
+                id="confirm_check"
+                required
+              >
+                <Form.Check.Input type='checkbox' />
+                <Form.Check.Label 
+                style={{fontSize:'16px', color:'#000000'}}>
+                  <span className="text-danger">*</span>
+                  ฉันได้อ่าน ข้อกำหนดและเงื่อนไข ทั้งหมดแล้ว ฉันเข้าใจและยอมรับ นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคล
+                  </Form.Check.Label>
+              </Form.Check>
+            </Form.Text>
             <Form.Check
               type="checkbox"
               id="email_check"
+              style={{fontSize:'16px'}}
               label="ฉันต้องการได้รับข่าวสารทางอีเมล"
             />
           </Form.Group>
@@ -213,7 +224,7 @@ export default function Register() {
             <button
               type="submit"
               disabled={btnStatus}
-              style={{ width: "365px ", backgroundColor: "#9F8F7C" }}
+              style={{ width: "365px ", backgroundColor: "#9F8F7C", fontSize:'16px'}}
               className="btn fw-bold text-white mb-4"
             >
               ลงทะเบียน

@@ -55,21 +55,19 @@ export default function Login({ setIsOpen }) {
         show={setIsOpen}
         onHide={() => setIsOpen(false)}
       >
-        <Modal.Header closeButton>
-          <Modal.Title className="ps-5">เข้าสู่ระบบ</Modal.Title>
-        </Modal.Header>
         <Modal.Body>
+        <Modal.Title className="pt-3 pb-4 ps-5" style={{fontSize:'18px'}}>เข้าสู่ระบบ</Modal.Title>
           <Form onSubmit={handleSubmit} className="ps-5 pe-5">
             {alertSuccess ? (
-              <Alert variant="success">เข้าสู่ระบบสำเร็จ</Alert>
+              <Alert variant="success" style={{fontSize:'14px'}}>เข้าสู่ระบบสำเร็จ</Alert>
             ) : null}
             {errorMessage ? (
-              <p className="text-danger text-center">{errorMessage}</p>
+              <p className="text-danger text-center" style={{fontSize:'14px'}}>{errorMessage}</p>
             ) : null}
             <Row>
               <Col xs={12} md={12}>
                 <Form.Group className="mb-3">
-                  <Form.Label className="col-sm-2 col-form-label">
+                  <Form.Label className="col-sm-2 col-form-label" style={{fontSize:'18px'}}>
                     อีเมล
                   </Form.Label>
                   <Form.Control
@@ -82,7 +80,7 @@ export default function Login({ setIsOpen }) {
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                  <Form.Label className="col-sm-2 col-form-label">
+                  <Form.Label className="col-sm-2 col-form-label" style={{fontSize:'18px'}}>
                     รหัสผ่าน
                   </Form.Label>
                   <Form.Control
@@ -97,22 +95,22 @@ export default function Login({ setIsOpen }) {
               </Col>
             </Row>
             <div className="d-flex f-start">
-              <a href="#" className="text-dark">
+              <a href="#" className="text-dark" style={{fontSize:'14px'}}>
                 ลืมรหัสผ่าน
               </a>
             </div>
             <div className="text-center">
               <button
                 type="submit"
-                style={{ width: "365px ", backgroundColor: "#9F8F7C" }}
+                style={{ width: "365px ", backgroundColor: "#9F8F7C", fontSize:'16px' }}
                 className="btn fw-bold text-white"
               >
                 เข้าสู่ระบบ
               </button>
             </div>
-            <div className="pt-3 d-flex justify-content-between">
+            <div className="pt-3 d-flex justify-content-between" style={{fontSize:'14px'}}>
               <p>ยังไม่มีบัญชีผู้ใช้งาน</p>
-              <a href="/register" className="text-dark">
+              <a href="/register" className="text-dark" style={{fontSize:'14px'}}>
                 ลงทะเบียน
               </a>
             </div>
