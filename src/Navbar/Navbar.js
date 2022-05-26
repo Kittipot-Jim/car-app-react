@@ -12,7 +12,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const token = localStorage.getItem("token");
   
-   useEffect(() => {
+  useEffect(() => {
     if (token != null) {
       const decodedToken = decode(token);
 
@@ -32,7 +32,7 @@ export default function Navbar() {
           .catch((error) => console.log("error", error));
       }
     }
-  }, []);
+  }, [token]);
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -85,7 +85,7 @@ export default function Navbar() {
                       <img
                         src={profile}
                         alt="Avatar"
-                        className="d-flex justify-content-center p-3 mb-2"
+                        className="d-flex justify-content-center mb-4"
                         style={{ width: "134px", height: "131px" }}
                       />
                     </div>
@@ -129,7 +129,7 @@ export default function Navbar() {
                       <img
                         src={profile}
                         alt="Avatar"
-                        className="d-flex justify-content-center p-3 mb-2"
+                        className="d-flex justify-content-center mb-5"
                         style={{ width: "134px", height: "131px" }}
                       />
                     </div>

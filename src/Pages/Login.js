@@ -47,26 +47,6 @@ export default function Login({ setIsOpen }) {
         console.log("error", error);
       }
     });
-
-
-    // fetch(API_URL + "authen", {
-    //   method: "POST",
-    //   headers: { "content-Type": "application/json" },
-    //   body: JSON.stringify({ email, password }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((result) => {
-    //     if (result["status"]["code"] === "200") {
-    //       handleAlert();
-    //       localStorage.setItem("token", result.data.token);
-    //       window.location = "/";
-    //     } else if (result["status"]["code"] === "401") {
-    //       setErrorMessage("อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
-    //       setEmail("");
-    //       setPassword("");
-    //     }
-    //   })
-    //   .catch((error) => console.log("error", error));
   };
 
   return (
