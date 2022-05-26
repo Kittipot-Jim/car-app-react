@@ -93,7 +93,7 @@ export default function Register() {
     <div className="container">
       <div
         className="container bg-form-register p-5"
-        style={{ marginTop: "100px" }}
+        style={{ marginTop: "100px", marginBottom: "100px" }}
       >
         {alertSuccess ? (
           <Alert variant="success">สมัครสมาชิกสำเร็จ</Alert>
@@ -115,7 +115,7 @@ export default function Register() {
             <Col xs={8} md={9}>
               <Form.Group className="mb-3">
                 <Form.Label
-                  className="col-sm-2 col-form-label"
+                  className="col-sm-4 col-form-label"
                   style={{ fontSize: "18px" }}
                 >
                   อีเมล<span className="text-danger">*</span>
@@ -131,7 +131,7 @@ export default function Register() {
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label
-                  className="col-sm-2 col-form-label"
+                  className="col-sm-4 col-form-label"
                   style={{ fontSize: "18px" }}
                 >
                   รหัสผ่าน<span className="text-danger">*</span>
@@ -147,7 +147,7 @@ export default function Register() {
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label
-                  className="col-sm-3 col-form-label"
+                  className="col-sm-6 col-form-label"
                   style={{ fontSize: "18px" }}
                 >
                   ยืนยันรหัสผ่าน<span className="text-danger">*</span>
@@ -224,22 +224,26 @@ export default function Register() {
             </Col>
           </Row>
           <Form.Group className="mb-3">
-            <Form.Text id="pasword_length">
-              <Form.Check className="pb-3">
-                <Form.Check.Input type="checkbox" id="confirm_check" required />
-                <Form.Check.Label
-                  style={{ fontSize: "16px", color: "#000000" }}
-                >
-                  <span className="text-danger">*</span>ฉันได้อ่าน <a href="#" className="text-dark">ข้อกำหนดและเงื่อนไข</a> ทั้งหมดแล้ว ฉันเข้าใจและยอมรับ <a href="#" className="text-dark">นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคล</a>
-                </Form.Check.Label>
-              </Form.Check>
-            </Form.Text>
-            <Form.Check
-              type="checkbox"
-              id="email_check"
-              style={{ fontSize: "16px" }}
-              label="ฉันต้องการได้รับข่าวสารทางอีเมล"
-            />
+            <Form.Check className="pb-3">
+              <Form.Check.Input type="checkbox" id="confirm_check" required 
+                style={{width: '20px', height: '20px'}} 
+              />
+              <Form.Check.Label
+                style={{ fontSize: "16px", color: "#000000" }}
+              >
+                <span className="text-danger">*</span>ฉันได้อ่าน <a href="#" className="text-dark">ข้อกำหนดและเงื่อนไข</a> ทั้งหมดแล้ว ฉันเข้าใจและยอมรับ <a href="#" className="text-dark">นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคล</a>
+              </Form.Check.Label>
+            </Form.Check>
+            <Form.Check className="pb-3">
+              <Form.Check.Input type="checkbox" id="email_check" 
+                style={{width: '20px', height: '20px'}} 
+              />
+              <Form.Check.Label
+                style={{ fontSize: "16px", color: "#000000" }}
+              >
+                ฉันต้องการได้รับข่าวสารทางอีเมล
+              </Form.Check.Label>
+            </Form.Check>
           </Form.Group>
           <div className="text-center pt-2">
             <button
