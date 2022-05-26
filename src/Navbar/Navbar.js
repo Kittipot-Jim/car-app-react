@@ -11,19 +11,25 @@ export default function Navbar() {
 
   const [isOpen, setIsOpen] = useState(false);
   const token = localStorage.getItem("token");
-
+  
   useEffect(() => {
-    if (token) {
+    if (token != null) {
       const decodedToken = decode(token);
 
-      if (decodedToken.exp * 1000 < new Date().getTime() + 100000) {
+      if (decodedToken.exp * 1000 < new Date().getTime() + 20000) {
         axios
           .get(API_URL + "refresh-token", {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then((response) => {
-            localStorage.setItem("token", response.data.data.token);
-          });
+            if (response.data.status.code === "200") {
+              console.log(response.data.data.token);
+              localStorage.setItem("token", response.data.data.token);
+            } else if (response.data.status.code === "401") {
+              localStorage.removeItem("token");
+            }
+          })
+          .catch((error) => console.log("error", error));
       }
     }
   }, []);
@@ -50,13 +56,13 @@ export default function Navbar() {
               <i className="bi bi-house" /> LOGO
             </a>
             <ul className="navbar-nav me-auto" style={{ fontSize: "20px" }}>
-              <li className="nav-item nav-link ps-5 fw-bold text-white">
+              <li className="nav-item nav-link fw-bold text-white" style={{ paddingLeft: "91px"}}>
                 ซื้อรถยนต์
               </li>
-              <li className="nav-item nav-link ps-5 fw-bold text-white">
+              <li className="nav-item nav-link fw-bold text-white" style={{ paddingLeft: "111px"}}>
                 ขายรถยนต์
               </li>
-              <li className="nav-item nav-link ps-5 fw-bold text-white">
+              <li className="nav-item nav-link fw-bold text-white" style={{ paddingLeft: "111px"}}>
                 เกี่ยวกับเรา
               </li>
             </ul>
@@ -83,24 +89,24 @@ export default function Navbar() {
                         style={{ width: "134px", height: "131px" }}
                       />
                     </div>
-                    <li>
-                      <a className="dropdown-item" src="#">
-                        ข้อมูลส่วนตัว
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" src="#">
-                        ตั้งค่าบัญชี
-                      </a>
-                    </li>
-                    <li>
-                      <div className="dropdown-divider"></div>
-                    </li>
-                    <li>
-                      <button className="dropdown-item" onClick={handleLogout}>
-                        ออกจากระบบ
-                      </button>
-                    </li>
+                      <li>
+                        <a className="dropdown-item ps-4" src="#">
+                          ข้อมูลส่วนตัว
+                        </a>
+                      </li>
+                      <li>
+                        <a className="dropdown-item ps-4" src="#">
+                          ตั้งค่าบัญชี
+                        </a>
+                      </li>
+                      <li>
+                        <div className="dropdown-divider"></div>
+                      </li>
+                      <li>
+                        <button className="dropdown-item ps-4" onClick={handleLogout}>
+                          ออกจากระบบ
+                        </button>
+                      </li>
                   </ul>
                 </li>
               </ul>
@@ -129,7 +135,7 @@ export default function Navbar() {
                     </div>
                     <li>
                       <button
-                        className="dropdown-item"
+                        className="dropdown-item ps-4"
                         type="button"
                         onClick={() => setIsOpen(true)}
                       >
@@ -141,7 +147,7 @@ export default function Navbar() {
                       <div className="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="/register">
+                      <a className="dropdown-item ps-4" href="/register">
                         สมัครสมาชิก
                       </a>
                     </li>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -6,6 +7,8 @@ import Modal from "react-bootstrap/Modal";
 import Alert from "react-bootstrap/Alert";
 
 export default function Login({ setIsOpen }) {
+  const API_URL = "http://localhost:8080/api/v1/customer/"
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,7 +29,24 @@ export default function Login({ setIsOpen }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:8080/api/v1/customer/authen", {
+    // axios.post(API_URL + "authen", {
+    //   email, password
+    // })
+    // .then((response) => {
+    //   if (response.data.status.code === "200") {
+    //     handleAlert();
+    //     localStorage.setItem("token", response.data.data.token);
+    //     window.location = "/";
+    //   } else if (response.data === 401) {
+    //     setErrorMessage("อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
+    //     setEmail("");
+    //     setPassword("");
+    //   }
+    // })
+    // .catch((error) => console.log("error", error));
+
+
+    fetch(API_URL + "authen", {
       method: "POST",
       headers: { "content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -80,7 +100,7 @@ export default function Login({ setIsOpen }) {
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                  <Form.Label className="col-sm-2 col-form-label" style={{fontSize:'18px'}}>
+                  <Form.Label className="col-sm-4 col-form-label" style={{fontSize:'18px'}}>
                     รหัสผ่าน
                   </Form.Label>
                   <Form.Control
@@ -99,7 +119,7 @@ export default function Login({ setIsOpen }) {
                 ลืมรหัสผ่าน
               </a>
             </div>
-            <div className="text-center">
+            <div className="text-center pt-2">
               <button
                 type="submit"
                 style={{ width: "365px ", backgroundColor: "#9F8F7C", fontSize:'16px' }}
