@@ -29,41 +29,44 @@ export default function Login({ setIsOpen }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // axios.post(API_URL + "authen", {
-    //   email, password
-    // })
-    // .then((response) => {
-    //   if (response.data.status.code === "200") {
-    //     handleAlert();
-    //     localStorage.setItem("token", response.data.data.token);
-    //     window.location = "/";
-    //   } else if (response.data === 401) {
-    //     setErrorMessage("อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
-    //     setEmail("");
-    //     setPassword("");
-    //   }
-    // })
-    // .catch((error) => console.log("error", error));
-
-
-    fetch(API_URL + "authen", {
-      method: "POST",
-      headers: { "content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+    axios.post(API_URL + "authen", {
+      email, password
     })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result["status"]["code"] === "200") {
-          handleAlert();
-          localStorage.setItem("token", result.data.token);
-          window.location = "/";
-        } else if (result["status"]["code"] === "401") {
-          setErrorMessage("อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
-          setEmail("");
-          setPassword("");
-        }
-      })
-      .catch((error) => console.log("error", error));
+    .then((response) => {
+      if (response.data.status.code === "200") {
+        handleAlert();
+        localStorage.setItem("token", response.data.data.token);
+        window.location = "/";
+      }
+    })
+    .catch((error) => {
+      if (error.response.data.status.code === "401") {
+        setErrorMessage("อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
+        setEmail("");
+        setPassword("");
+        console.log("error", error);
+      }
+    });
+
+
+    // fetch(API_URL + "authen", {
+    //   method: "POST",
+    //   headers: { "content-Type": "application/json" },
+    //   body: JSON.stringify({ email, password }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((result) => {
+    //     if (result["status"]["code"] === "200") {
+    //       handleAlert();
+    //       localStorage.setItem("token", result.data.token);
+    //       window.location = "/";
+    //     } else if (result["status"]["code"] === "401") {
+    //       setErrorMessage("อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
+    //       setEmail("");
+    //       setPassword("");
+    //     }
+    //   })
+    //   .catch((error) => console.log("error", error));
   };
 
   return (

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -70,21 +71,22 @@ export default function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(API_URL + "register", {
-      method: "POST",
-      headers: { "content-Type": "application/json" },
-      body: JSON.stringify({ email, password, passwordConfirm }),
+    axios.post(API_URL + "register", {
+      email, password, passwordConfirm
     })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result["status"]["code"] === "200") {
-          handleAlertSuccess();
-          window.location.href = "/";
-        } else if (result["status"]["code"] === "500") {
-          handleAlertError();
-        }
-      })
-      .catch((error) => console.log("error", error));
+    .then((response) => {
+      if (response.data.status.code === "200") {
+        handleAlertSuccess();
+        window.location.href = "/";
+      }
+    })
+    .catch((error) => {
+      if (error.response.data.status.code === "500") {
+        handleAlertError();
+        console.log("error", error);
+      }
+    });
+
   };
 
   return (

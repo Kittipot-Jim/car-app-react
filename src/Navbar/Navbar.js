@@ -12,21 +12,21 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const token = localStorage.getItem("token");
   
-  useEffect(() => {
+   useEffect(() => {
     if (token != null) {
       const decodedToken = decode(token);
 
-      if (decodedToken.exp * 1000 < new Date().getTime() + 20000) {
+      if ((decodedToken.exp * 1000) - 1200000 < new Date().getTime()) {
         axios
           .get(API_URL + "refresh-token", {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then((response) => {
             if (response.data.status.code === "200") {
-              console.log(response.data.data.token);
               localStorage.setItem("token", response.data.data.token);
             } else if (response.data.status.code === "401") {
               localStorage.removeItem("token");
+              window.location.reload();
             }
           })
           .catch((error) => console.log("error", error));
