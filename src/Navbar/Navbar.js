@@ -56,13 +56,22 @@ export default function Navbar() {
               <i className="bi bi-house" /> LOGO
             </a>
             <ul className="navbar-nav me-auto" style={{ fontSize: "20px" }}>
-              <li className="nav-item nav-link fw-bold text-white" style={{ paddingLeft: "91px"}}>
+              <li
+                className="nav-item nav-link fw-bold text-white"
+                style={{ paddingLeft: "91px" }}
+              >
                 ซื้อรถยนต์
               </li>
-              <li className="nav-item nav-link fw-bold text-white" style={{ paddingLeft: "111px"}}>
+              <li
+                className="nav-item nav-link fw-bold text-white"
+                style={{ paddingLeft: "111px" }}
+              >
                 ขายรถยนต์
               </li>
-              <li className="nav-item nav-link fw-bold text-white" style={{ paddingLeft: "111px"}}>
+              <li
+                className="nav-item nav-link fw-bold text-white"
+                style={{ paddingLeft: "111px" }}
+              >
                 เกี่ยวกับเรา
               </li>
             </ul>
@@ -89,72 +98,49 @@ export default function Navbar() {
                         style={{ width: "134px", height: "131px" }}
                       />
                     </div>
-                      <li>
-                        <a className="dropdown-item ps-4" src="#">
-                          ข้อมูลส่วนตัว
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item ps-4" src="#">
-                          ตั้งค่าบัญชี
-                        </a>
-                      </li>
-                      <li>
-                        <div className="dropdown-divider"></div>
-                      </li>
-                      <li>
-                        <button className="dropdown-item ps-4" onClick={handleLogout}>
-                          ออกจากระบบ
-                        </button>
-                      </li>
+                    <li>
+                      <a className="dropdown-item ps-4" src="#">
+                        ข้อมูลส่วนตัว
+                      </a>
+                    </li>
+                    <li>
+                      <a className="dropdown-item ps-4" src="#">
+                        ตั้งค่าบัญชี
+                      </a>
+                    </li>
+                    <li>
+                      <div className="dropdown-divider"></div>
+                    </li>
+                    <li>
+                      <button
+                        className="dropdown-item ps-4"
+                        onClick={handleLogout}
+                      >
+                        ออกจากระบบ
+                      </button>
+                    </li>
                   </ul>
                 </li>
               </ul>
             ) : (
               // Navbar without token
               <ul className="navbar-nav d-flex flex-row">
-                <li className="nav-item">
-                  <a href="#" className="nav-link" data-bs-toggle="dropdown">
-                    <Image
-                      src={icon}
-                      alt="nav-icon"
-                      style={{ width: "23.15px", height: "25px" }}
-                    />
-                  </a>
-                  <ul
-                    className="dropdown-menu dropdown-menu-end"
-                    style={{ width: "335px" }}
-                  >
-                    <div className="d-flex justify-content-center">
-                      <img
-                        src={profile}
-                        alt="Avatar"
-                        className="d-flex justify-content-center mb-5"
-                        style={{ width: "134px", height: "131px" }}
-                      />
-                    </div>
-                    <li>
-                      <button
-                        className="dropdown-item ps-4"
-                        type="button"
-                        onClick={() => setIsOpen(true)}
-                      >
-                        เข้าสู่ระบบ
-                      </button>
-                      {isOpen && <Login setIsOpen={setIsOpen} />}
-                    </li>
-                    <li>
-                      <div className="dropdown-divider"></div>
-                    </li>
-                    <li>
-                      <a className="dropdown-item ps-4" href="/register">
-                        สมัครสมาชิก
-                      </a>
-                    </li>
-                  </ul>
-                </li>
+                <li className="nav-item"></li>
+                <a
+                  href="#"
+                  className="nav-link"
+                  onClick={() => setIsOpen(true)}
+                >
+                  <Image
+                    src={icon}
+                    alt="nav-icon"
+                    style={{ width: "23.15px", height: "25px" }}
+                  />
+                </a>
+                {isOpen && <Login setIsOpen={setIsOpen} />}
               </ul>
             )}
+            ;
           </div>
         </div>
       </nav>

@@ -10,11 +10,13 @@ export default function Register() {
   const API_URL = "http://localhost:8080/api/v1/customer/";
 
   const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessageEmail, setErrorMessageEmail] = useState("");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
+  const [emailLength, setEmailLength] = useState(true);
   const [passwordLength, setPasswordLength] = useState(false);
   const [containsNumbers, setContainsNumber] = useState(false);
   const [isUpperCase, setIsUpperCase] = useState(false);
@@ -31,7 +33,7 @@ export default function Register() {
   };
 
   const btnStatus =
-    passwordLength && containsNumbers && isUpperCase ? false : true;
+    emailLength && passwordLength && containsNumbers && isUpperCase ? false : true;
 
   // check for numbers
   const checkForNumbers = (string) => {
@@ -59,14 +61,25 @@ export default function Register() {
 
   // check confirm password
   const handleChangePasswordConfirm = (e) => {
-    const targetValue = e;
-    if (targetValue !== password)
+    if (e !== password) {
       setErrorMessage("รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน");
-    else {
+    } else {
       setErrorMessage("");
     }
     setPasswordConfirm(e);
   };
+
+  // check email than 100
+  const handleChangeEmail = (e) => {
+    if (e.length > 100) {
+      setErrorMessageEmail("อีเมลมีตัวอักษรมากกว่า 100 ตัว")
+      setEmailLength(false);
+    } else {
+      setErrorMessageEmail("");
+      setEmailLength(true);
+    }
+    setEmail(e);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -113,7 +126,7 @@ export default function Register() {
         <Form onSubmit={handleSubmit}>
           <Row>
             <Col xs={8} md={9}>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-4">
                 <Form.Label
                   className="col-sm-4 col-form-label"
                   style={{ fontSize: "18px" }}
@@ -122,14 +135,17 @@ export default function Register() {
                 </Form.Label>
                 <Form.Control
                   type="email"
-                  className="form-control mb-3"
+                  className="form-control mb-1"
                   name="email"
                   value={email}
                   required
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => handleChangeEmail(e.target.value)}
                 />
+                {errorMessageEmail ? (
+                  <p className="text-danger error-message">{errorMessageEmail}</p>
+                ) : null}
               </Form.Group>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-4">
                 <Form.Label
                   className="col-sm-4 col-form-label"
                   style={{ fontSize: "18px" }}
@@ -145,7 +161,7 @@ export default function Register() {
                   onChange={(e) => handleChange(e.target.value)}
                 />
               </Form.Group>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-5">
                 <Form.Label
                   className="col-sm-6 col-form-label"
                   style={{ fontSize: "18px" }}
@@ -154,17 +170,15 @@ export default function Register() {
                 </Form.Label>
                 <Form.Control
                   type="password"
-                  className="form-control mb-3"
+                  className="form-control mb-1"
                   name="passwordConfirm"
                   value={passwordConfirm}
                   required
                   onChange={(e) => handleChangePasswordConfirm(e.target.value)}
                 />
                 {errorMessage ? (
-                  <p className="text-danger">{errorMessage}</p>
-                ) : (
-                  <br />
-                )}
+                  <p className="text-danger error-message">{errorMessage}</p>
+                ) : null}
               </Form.Group>
             </Col>
             <Col
@@ -225,22 +239,30 @@ export default function Register() {
           </Row>
           <Form.Group className="mb-3">
             <Form.Check className="pb-3">
-              <Form.Check.Input type="checkbox" id="confirm_check" required 
-                style={{width: '20px', height: '20px'}} 
+              <Form.Check.Input
+                type="checkbox"
+                id="confirm_check"
+                required
+                style={{ width: "20px", height: "20px" }}
               />
-              <Form.Check.Label
-                style={{ fontSize: "16px", color: "#000000" }}
-              >
-                <span className="text-danger">*</span>ฉันได้อ่าน <a href="#" className="text-dark">ข้อกำหนดและเงื่อนไข</a> ทั้งหมดแล้ว ฉันเข้าใจและยอมรับ <a href="#" className="text-dark">นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคล</a>
+              <Form.Check.Label style={{ fontSize: "16px", color: "#000000" }}>
+                <span className="text-danger">*</span>ฉันได้อ่าน{" "}
+                <a href="#" className="text-dark">
+                  ข้อกำหนดและเงื่อนไข
+                </a>{" "}
+                ทั้งหมดแล้ว ฉันเข้าใจและยอมรับ{" "}
+                <a href="#" className="text-dark">
+                  นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคล
+                </a>
               </Form.Check.Label>
             </Form.Check>
             <Form.Check className="pb-3">
-              <Form.Check.Input type="checkbox" id="email_check" 
-                style={{width: '20px', height: '20px'}} 
+              <Form.Check.Input
+                type="checkbox"
+                id="email_check"
+                style={{ width: "20px", height: "20px" }}
               />
-              <Form.Check.Label
-                style={{ fontSize: "16px", color: "#000000" }}
-              >
+              <Form.Check.Label style={{ fontSize: "16px", color: "#000000" }}>
                 ฉันต้องการได้รับข่าวสารทางอีเมล
               </Form.Check.Label>
             </Form.Check>
